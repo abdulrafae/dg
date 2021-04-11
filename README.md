@@ -55,7 +55,7 @@ bash apply_bpe.sh fr algo en (e.g. algo1,algo2,algo3 or algo4)
 ```
 
 ### Train NMT System
-Train French+Metaphone-English Concatenation Model
+Train French+Algorithm1-English Concatenation Model
 ```
 bash train_concatenation.sh
 ```
