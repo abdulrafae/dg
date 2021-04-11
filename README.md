@@ -56,13 +56,13 @@ python algorithm1.py or python algorithm2.py or python algorithm3.py or python a
 
 Byte-pair encode the data
 ```
-bash apply_bpe.sh fr algo en (e.g. algo1,algo2,algo3 or algo4)
+bash apply_bpe.sh en algo fr (e.g. algo1,algo2,algo3 or algo4)
 ```
 
 ### Train NMT System
 Train French+Algorithm1-English Concatenation Model
 ```
-bash train_concatenation.sh
+bash train_concatenation.sh en algo fr (e.g. algo1,algo2,algo3 or algo4)
 ```
 
 ## (2) Coding Language Modeling
