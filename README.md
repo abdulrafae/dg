@@ -1,4 +1,9 @@
-# Coding Textual Inputs Boosts the Accuracy of Neural Networks
+# Grouping Words with Semantic Diversity
+Abdul Rafae Khan<sup>+</sup>, Karine Chubarian<sup>++</sup>, Anastasios Sidiropoulos<sup>++</sup> & Jia Xu<sup>+</sup>
+
+<sup>+</sup> Stevens Institute of Technology
+
+<sup>++</sup> University of Illinois at Chicago
 
 ## (1) Neural Machine Translation (NMT)
 
