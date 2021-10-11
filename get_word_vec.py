@@ -8,6 +8,7 @@ with codecs.open(filename,'r',encoding='utf-8') as in_data:
 		words = line.strip().split(' : ')
 		data.append(words)
 
+emb=100
 model = Word2Vec(data, size=emb, window=5, min_count=1, workers=4)
 model.save("data/w2v_models/"+lang+"_"+str(emb)+".model")
 print("DONE!")
