@@ -13,8 +13,6 @@ import random
 from collections import Counter
 from sklearn.cluster import MiniBatchKMeans
 from tqdm import tqdm
-
-emb = 2
 	
 data = []
 base_path = 'data/'
