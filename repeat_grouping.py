@@ -77,7 +77,7 @@ if method == 'randmt':
 		id += 1
 
 ####################
-#####FIT RANDMT#####
+#####FIT RANDUNI####
 ####################
 elif method == 'randuni':
 	coding='randuni'	
