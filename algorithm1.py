@@ -13,16 +13,21 @@ import random
 from collections import Counter
 from sklearn.cluster import MiniBatchKMeans
 from tqdm import tqdm
-	
-data = []
-base_path = 'data/'
+import argparse
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--infile', '-i', type=str, help='Input file')
+parser.add_argument('--outpath', '-o', type=str, help='Output path')
+args = parser.parse_args()
+
+infile = args.infile
+outpth = args.outpath
 
 vocab_py_to_char = defaultdict(set)
 vocab_char_to_py = defaultdict(set)
 
 vocab = defaultdict(int)
-filename = sys.argv[1]
-with codecs.open(filename,'r',encoding='utf-8') as in_data:
+with codecs.open(infile,'r',encoding='utf-8') as in_data:
 	for line in tqdm(in_data.readlines()):
 		words = line.strip().split(' : ')
 		vocab[words[0]] = int(words[1])
@@ -44,8 +49,6 @@ for key in vocab_py_to_char.keys():
 	size = len(vocab_py_to_char[key])
 	lengths.append(size)
 
-size_hist = Counter(lengths)
-
 id = 0
 while len(tmp)!=0:
 	size = random.choice(lengths)
@@ -58,7 +61,7 @@ while len(tmp)!=0:
 	lengths.remove(size)
 	id += 1
 
-target = codecs.open('data/mapping/algo1_mapping.en','w',encoding='utf-8')
+target = codecs.open(outpath+'/algo1_mapping.txt','w',encoding='utf-8')
 for key in random_mapping.keys():
 	target.write(str(key)+" : "+str(random_mapping[key])+"\n")
 target.close()

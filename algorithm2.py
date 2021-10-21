@@ -22,24 +22,29 @@ from sklearn.neighbors import NearestNeighbors
 from tqdm import tqdm
 from nltk.util import ngrams
 import torch
+import argparse
 
-random.seed(1234)
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--infile', '-i', type=str, help='Input file')
+parser.add_argument('--outpath', '-o', type=str, help='Output path')
+parser.add_argument('--seed', '-s', default=1234, type=int, help='Random seed')
+args = parser.parse_args()
+
+infile = args.infile
+outpth = args.outpath
+seed = args.seed
+
+random.seed(seed)
 
 file_exists = False
-lang = 'en'
-tgt = 'fr'
-direction = lang+'-'+tgt
 data = dict()
-path = 'data/'
-filenames = [path+'train.'+direction+'.'+lang]
-emb = 100
 chars_dict = dict()
 vocab = defaultdict(str)
 vocab_list = []
 print("Reading Files!")
 
-filename = sys.argv[1]
-with codecs.open(filename,'r',encoding='utf-8') as in_data:
+infile = args.infile
+with codecs.open(infile,'r',encoding='utf-8') as in_data:
 	for line in tqdm(in_data.readlines()):
 		words = line.strip().split(' : ')
 		vocab[words[0]] = int(words[1])
@@ -146,7 +151,7 @@ for key in metaphone_dict.keys():
 	current_count -= len(cluster_list)
 
 print("Writing Groups!")
-out_file = codecs.open(base_path+"/mapping/algo2_mapping."+lang,'w',encoding='utf-8')
+out_file = codecs.open(outpath+"/algo2_mapping.txt",'w',encoding='utf-8')
 for key in final_clusters.keys():
 	for word in final_clusters[key]:
 		out_file.write(word+" : "+str(key)+"\n")

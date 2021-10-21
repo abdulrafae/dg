@@ -5,7 +5,15 @@ import random
 import sys
 import numpy as np
 from pathlib import Path
+import argparse
 
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--infile', '-i', type=str, help='Input file')
+parser.add_argument('--outpath', '-o', type=str, help='Output path')
+args = parser.parse_args()
+
+infile = args.infile
+outpath = args.outpath
 
 class Partition(UserDict):
     def __init__(self, input_pairs: dict, relative_frequency: dict, k: int, n: int):
@@ -206,18 +214,18 @@ def get_approximate_clustering(vocabulary, epsilon, relative_frequency, n, k, ex
     return partition
 
 
-def compute_the_clustering(input_path, epsilon):
+def compute_the_clustering(infile, epsilon, outpath):
     vocabulary = []
     phi = {}
     text_length = 0
-    with open(input_path, 'r', encoding="utf-8") as vocab_file:
+    with open(infile, 'r', encoding="utf-8") as vocab_file:
         for line in vocab_file:
             y = line.strip().split()
             print(y)
             vocabulary.append(y[0])
             phi[y[0]] = float(y[2])
             text_length = text_length + int(y[2])
-    print(f'{input_path} text length {text_length} vocabulary size {len(vocabulary)}')
+    print(f'{infile} text length {text_length} vocabulary size {len(vocabulary)}')
     for word in vocabulary:
         phi[word] = phi[word] / text_length
     k = len(vocabulary) // 20
@@ -252,20 +260,19 @@ def compute_the_clustering(input_path, epsilon):
     else:
         final_solution = intermediate_solution
         print('We do not finalize the solution')
-    result = f'File {input_path} has the final solution size: {len(final_solution.data)} ' + f'The final entropy: {final_solution.entropy}' + ' ' + final_solution.get_cluster_size()
-    #result_file_name = input_path[:-4] + "_result.txt"
+    result = f'File {infile} has the final solution size: {len(final_solution.data)} ' + f'The final entropy: {final_solution.entropy}' + ' ' + final_solution.get_cluster_size()
+    #result_file_name = infile[:-4] + "_result.txt"
     #print(result_file_name)
     #with open(result_file_name, 'w', encoding="utf-8") as result_file:
      #   result_file.write(result)
     #result_file.close()
-	output_file_name = "data/mapping/algo4_mapping.txt"
+	output_file_name = outpath+"/algo4_mapping.txt"
     with open(output_file_name, 'w', encoding="utf-8") as final_clustering:
         for current_word in final_solution.data:
             final_clustering.write(f'{current_word} : {final_solution[current_word]}\n')
 	final_clustering.close()
-	
 
 user_epsilon = 1 #desired precision
-compute_the_clustering(sys.argv[1], user_epsilon)
+compute_the_clustering(infile, user_epsilon)
 
 
