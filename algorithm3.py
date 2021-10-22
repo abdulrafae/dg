@@ -122,7 +122,7 @@ for i in range(len(ranking_list)):
 	final_clusters[str(cluster_idx)].append(ranking_list[i])
 
 print("Writing Groups!")
-rank_file = codecs.open(outpath+"/algo3_mapping."+lang,'w',encoding='utf-8')
+rank_file = codecs.open(outpath+"/algo3_grouping."+lang,'w',encoding='utf-8')
 for key in final_clusters.keys():
 	for word in final_clusters[key]:
 		rank_file.write(word+" : "+str(key)+"\n")

@@ -151,7 +151,7 @@ for key in metaphone_dict.keys():
 	current_count -= len(cluster_list)
 
 print("Writing Groups!")
-out_file = codecs.open(outpath+"/algo2_mapping.txt",'w',encoding='utf-8')
+out_file = codecs.open(outpath+"/algo2_grouping.txt",'w',encoding='utf-8')
 for key in final_clusters.keys():
 	for word in final_clusters[key]:
 		out_file.write(word+" : "+str(key)+"\n")

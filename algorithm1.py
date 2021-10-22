@@ -61,7 +61,7 @@ while len(tmp)!=0:
 	lengths.remove(size)
 	id += 1
 
-target = codecs.open(outpath+'/algo1_mapping.txt','w',encoding='utf-8')
+target = codecs.open(outpath+'/algo1_grouping.txt','w',encoding='utf-8')
 for key in random_mapping.keys():
 	target.write(str(key)+" : "+str(random_mapping[key])+"\n")
 target.close()

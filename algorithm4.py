@@ -266,7 +266,7 @@ def compute_the_clustering(infile, epsilon, outpath):
     #with open(result_file_name, 'w', encoding="utf-8") as result_file:
      #   result_file.write(result)
     #result_file.close()
-	output_file_name = outpath+"/algo4_mapping.txt"
+	output_file_name = outpath+"/algo4_grouping.txt"
     with open(output_file_name, 'w', encoding="utf-8") as final_clustering:
         for current_word in final_solution.data:
             final_clustering.write(f'{current_word} : {final_solution[current_word]}\n')
