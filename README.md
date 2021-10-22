@@ -39,19 +39,21 @@ Download and tokenize data
 bash prepare_data.sh
 ```
 
-Create vocabulary
-```
-python get_vocab.py 
-```
-
 Train word vectors
 ```
-python get_word_vec.py 
+python get_word_vec.py --infile data/train.en --outpath models/word2vec/ --emb 100
 ```
 
-Train word vectors
+Create groups
+```python algorithm1.py --infile data/train.en --outpath groupings/ 
+python algorithm2.py --infile data/train.en --outpath groupings/ 
+python algorithm3.py --infile data/train.en --outpath groupings/ --wordvecfile models/word2vec/w2v_100.model (use --matrixfile path/to/distance/matrix/file) 
+python algorithm4.py --infile data/train.en --outpath groupings/ 
 ```
-python algorithm1.py or python algorithm2.py or python algorithm3.py or python algorithm4.py
+
+Encode files
+```
+python encode_data.py --source en --target fr --algo algo1 --groupingfile groupings/algo1_grouping.txt --inpath data/ --filenames train,valid,test --outpath data/algo1en_fr/ 
 ```
 
 Byte-pair encode the data
@@ -84,8 +86,8 @@ Create vocabulary
 OUTPATH=data/processed/XLM_en/30k
 mkdir -p $OUTPATH
 
-python utils/getvocab.py --input $OUTPATH/train.en --output $OUTPATH/vocab.en
-python utils/getvocab.py --input $OUTPATH/train.enalgo1 --output $OUTPATH/vocab.algo1
+python get_vocab.py --infile $OUTPATH/train.en --outfile $OUTPATH/vocab.en
+python get_vocab.py --infile $OUTPATH/train.enalgo1 --outfile $OUTPATH/vocab.algo1
 ```
 
 Binarize data
